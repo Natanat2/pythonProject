@@ -969,5 +969,323 @@
 #             P[v] = min_k  # и записываем как предок
 #     U[min_k] = True  # просмотренную вершину помечаем
 
+# Задание 4.5.5
+# Задание на самопроверку.
+#
+# Реализуйте структуру дерева при помощи класса BinaryTree.
+#
+# # создаем корень и его потомки /7|2|5\
+# node_root = BinaryTree(2).insert_left(7).insert_right(5)
+# # левое поддерево корня /2|7|6\
+# node_7 = node_root.left_child.insert_left(2).insert_right(6)
+# # правое поддерево предыдущего узла /5|6|11\
+# node_6 = node_7.right_child.insert_left(5).insert_right(11)
+# # правое поддерево корня /|5|9\
+# node_5 = node_root.right_child.insert_right(9)
+# # левое поддерево предыдущего узла корня /4|9|\
+# node_9 = node_5.right_child.insert_left(4)
+#
+#
+# Создание собственных структур
+#
+# class Node:  # класс элемента
+#     def __init__(self, value = None, next_ = None):  # инициализируем
+#         self.value = value  # значением
+#         self.next = next_  # и ссылкой на следующий элемент
+#
+#     def __str__(self):
+#         return "Node value = " + str(self.value)
+#
+#
+# class LinkedList:  # класс списка
+#     def __init__(self):  # инициализируем пустым
+#         self.first = None
+#         self.last = None
+#
+#     def clear(self):  # очищаем список
+#         self.__init__()
+#
+#     def __str__(self):  # функция печати
+#         R = ''
+#
+#         pointer = self.first  # берем первый указатель
+#         while pointer is not None:  # пока указатель не станет None
+#             R += str(pointer.value)  # добавляем значение в строку
+#             pointer = pointer.next  # идем дальше по указателю
+#             if pointer is not None:  # если он существует добавляем пробел
+#                 R += ' '
+#         return R
+#
+#     def pushleft(self, value):
+#         if self.first is None:
+#             self.first = Node(value)
+#             self.last = self.first
+#         else:
+#             new_node = Node(value, self.first)
+#             self.first = new_node
+#
+#     def pushright(self, value):
+#         if self.first is None:
+#             self.first = Node(value)
+#             self.last = self.first
+#         else:
+#             new_node = Node(value)
+#             self.last.next = new_node
+#             self.last = new_node
+#
+#     def popleft(self):
+#         if self.first is None:  # если список пустой, возвращаем None
+#             return None
+#         elif self.first == self.last:  # если список содержит только один элемент
+#             node = self.first  # сохраняем его
+#             self.__init__()  # очищаем
+#             return node  # и возвращаем сохраненный элемент
+#         else:
+#             node = self.first  # сохраняем первый элемент
+#             self.first = self.first.next  # меняем указатель на первый элемент
+#             return node  # возвращаем сохраненный
+#
+#     def popright(self):
+#         if self.first is None:  # если список пустой, возвращаем None
+#             return None
+#         elif self.first == self.last:  # если список содержит только один элемент
+#             node = self.first  # сохраняем его
+#             self.__init__()  # очищаем
+#             return node  # и возвращаем сохраненный элемент
+#         else:
+#             node = self.last  # сохраняем последний
+#             pointer = self.first  # создаем указатель
+#             while pointer.next is not node:  # пока не найдем предпоследний
+#                 pointer = pointer.next
+#             pointer.next = None  # обнуляем указатели, чтобы
+#             self.last = pointer  # предпоследний стал последним
+#             return node  # возвращаем сохраненный
+#
+#     def __iter__(self):  # объявляем класс как итератор
+#         self.current = self.first  # в текущий элемент помещаем первый
+#         return self  # возвращаем итератор
+#
+#     def __next__(self):  # метод перехода
+#         if self.current is None:  # если текущий стал последним
+#             raise StopIteration  # вызываем исключение
+#         else:
+#             node = self.current  # сохраняем текущий элемент
+#             self.current = self.current.next  # совершаем переход
+#             return node  # и возвращаем сохраненный
+#
+#     def __len__(self):
+#         count = 0
+#         pointer = self.first
+#         while pointer is not None:
+#             count += 1
+#             pointer = pointer.next
+#         return count
+
+# Задание 4.7.1
+# Задание на самопроверку.
+#
+# Напишите функцию count, которая возвращает количество вхождений элемента в массив
+#
+# def count(array, element):
+#     count = 0
+#     for i in array:
+#         if i == element:
+#             count += 1
+#     return count
+
+# Задание 4.8.7
+# Задание на самопроверку.
+#
+# Модифицируйте алгоритм быстрой сортировки таким образом, чтобы ведущий элемент
+# выбирался как случайный среди подмассива, который сортируется на данном этапе.
+# Воспользуйтесь функцией из пакета random.
+#
+#
+# def qsort_random(array, left, right):
+#     p = random.choice(array[left:right + 1])
+#     i, j = left, right
+#     while i <= j:
+#         while array[i] < p:
+#             i += 1
+#         while array[j] > p:
+#             j -= 1
+#         if i <= j:
+#             count += 1
+#             array[i], array[j] = array[j], array[i]
+#             i += 1
+#             j -= 1
+#
+#     if j > left:
+#         qsort_random(array, left, j)
+#     if right > i:
+#         qsort_random(array, i, right)
+#
+# Задание
+# 5.3.2 Задание на самопроверку.
+#
+# Напишите обработчик, который на сообщения с фотографией будет отвечать сообщением «Nice
+# meme XDD».Бот должен отвечать не отдельным сообщение, а с привязкой к картинке.
+# Решение
+#
+# import telebot
+#
+# bot = telebot.TeleBot('TOKEN')
+#
+#
+# @bot.message_handler(content_types = ['photo', ])
+# def say_lmao(message: telebot.types.Message):
+#     bot.reply_to(message, 'Nice meme XDD')
+#
+#
+# bot.polling(none_stop = True)
+
+# Задание
+# 5.4
+# .4
+# Напишите
+# программу, которая
+# будет
+# с
+# помощью
+# парсера
+# lxml
+# доставать
+# текст
+# из
+# тега
+# tag2
+# следующего
+# HTML:
+#
+# < html >
+# < head > < title > Some
+# title < / title > < / head >
+# < body >
+# < tag1 > some
+# text
+# < tag2 > MY
+# TEXT < / tag2 >
+# < / tag1 >
+# < / body >
+# < / html >
+# Решение
+# import lxml.html
+#
+# html = ''' <html>
+#  <head> <title> Some title </title> </head>
+#  <body>
+#   <tag1> some text
+#      <tag2> MY TEXT </tag2>
+#    </tag1>
+#  </body>
+# </html>
+# '''
+#
+# tree = lxml.html.document_fromstring(html)
+#
+# text = tree.xpath('/html/body/tag1/tag2/text()')
+#
+# print(text)
+#
+# Задание
+# 5.4
+# .5
+# Используя
+# полученные
+# знания, допишите
+# сделанный
+# в
+# начале
+# юнита
+# скрипт(где
+# мы
+# доставали
+# заголовки
+# новостей
+# о
+# Python
+# с
+# Python.org) так, чтобы
+# он
+# показывал
+# ещё
+# и
+# дату
+# добавления
+# новости.
+#
+# Примечание: Для
+# получения
+# атрибутов
+# тега(т.е.его
+# дополнительных
+# параметров) используется
+# метод.get( < имя
+# атрибута >).
+#
+# Решение
+# import requests  # импортируем наш знакомый модуль
+# import lxml.html
+# from lxml import etree
+#
+# html = requests.get('https://www.python.org/').content  # получим html главной странички официального сайта python
+#
+# # создадим объект ElementTree. Он возвращается функцией parse()
+# tree = etree.parse('Welcome to Python.org.html',
+#                    lxml.html.HTMLParser())  # попытаемся спарсить наш файл с помощью html парсера
+#
+# ul = tree.findall(
+#     'body/div/div[3]/div/section/div[3]/div[1]/div/ul/li')  # помещаем в аргумент методу findall скопированный xpath
+#
+# # создаём цикл в котором мы будем выводить название каждого элемента из списка
+# for li in ul:
+#     a = li.find('a')  # в каждом элементе находим где хранится название. У нас это тег <a>
+#     time = li.find('time')
+#     print(time.get('datetime'), a.text)  # из этого тега забираем текст - это и будет нашим названием
+
+#
+# Задание 5.5.4
+# Напишите программу, которая будет записывать и кэшировать номера телефонов ваших друзей.
+#
+# Программа должна уметь воспринимать несколько команд:
+#
+# записать номер;
+# показать номер друга в консоли при вводе имени;
+# удалить номер друга по имени.
+# Кэширование надо производить с помощью Redis. Ввод и вывод информации должен быть реализован через консоль
+# (с помощью функций input() и print()).
+#
+#
+# import redis
+#
+# red = redis.Redis(
+#     host = 'ваш хост',
+#     port = ваш
+# порт,
+# password = пароль
+# )
+#
+# cont = True
+#
+# while cont:
+#     action = input('action:\t')
+#     if action == 'write':
+#         name = input('name:\t')
+#         phone = input('phone:\t')
+#         red.set(name, phone)
+#     elif action == 'read':
+#         name = input('name:\t')
+#         phone = red.get(name)
+#         if phone:
+#             print(f'{name}\'s phone is {str(phone)}')
+#     elif action == 'delete':
+#         name = input('name:\t')
+#         phone = red.delete(name)
+#         if phone:
+#             print(f"{name}'s phone is deleted")
+#         else:
+#             print(f"Not found {name}")
+#     elif action == 'stop':
+#         break
 
 1.13
