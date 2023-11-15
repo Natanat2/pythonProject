@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    ProductsList, ProductDetail, ProductCreate, ProductUpdate, ProductDelete, subscriptions
+    ProductsList, ProductDetail, ProductCreate, ProductUpdate, ProductDelete, subscriptions,
 )
 
 urlpatterns = [
